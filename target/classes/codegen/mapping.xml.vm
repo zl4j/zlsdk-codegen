@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${mapperPackage}.${mapperName}">
+
+    <sql id="Base_Table"> ${tableName} </sql>
+
+    <resultMap id="BaseResultMap" type="${entityPackage}.${entityName}">
+#foreach($field in $fields)
+#if(${field.isKey})
+		<id column="${field.columnName}" jdbcType="${field.columnType}" property="${field.name}" />
+#else
+		<result column="${field.columnName}" jdbcType="${field.columnType}" property="${field.name}" />
+#end
+#end
+    </resultMap>
+
+    <sql id="Base_Column_List">
+#foreach($field in $fields)
+#if(${foreach.last})
+		${field.columnName}
+#else
+		${field.columnName},
+#end
+#end
+    </sql>
+
+    <sql id="Where_Field_Key">
+#foreach($field in $keys)
+#if(${foreach.first})
+		${field.columnName} = #{${field.name}}
+#else
+		and ${field.columnName} = #{${field.name}}
+#end
+#end
+    </sql>
+
+    <sql id="Where_Column">
+#foreach($field in $fields)
+			<if test="${field.columnName} != null">
+#if(${foreach.first})
+				${field.columnName} = #{${field.columnName}, jdbcType=${field.columnType}}
+#else
+				and ${field.columnName} = #{${field.columnName}, jdbcType=${field.columnType}}
+#end
+			</if>
+#end
+    </sql>
+
+    <sql id="Where_Field">
+#foreach($field in $fields)
+			<if test="${field.name} != null">
+#if(${foreach.first})
+				${field.columnName} = #{${field.name}, jdbcType=${field.columnType}}
+#else
+				and ${field.columnName} = #{${field.name}, jdbcType=${field.columnType}}
+#end
+			</if>
+#end
+    </sql>
+
+    <insert id="insert" parameterType="${entityPackage}.${entityName}" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into
+        <include refid="Base_Table"/>
+        (
+        <include refid="Base_Column_List" />
+        ) values(
+#foreach($field in $fields)
+#if(${foreach.last})
+				#{${field.name},jdbcType=${field.columnType}}
+#else
+				#{${field.name},jdbcType=${field.columnType}},
+#end
+#end
+        );
+    </insert>
+
+    <insert id="batchInsert" parameterType="java.util.Collection" useGeneratedKeys="false" keyProperty="">
+        insert into
+        <include refid="Base_Table"/>
+        (
+        <include refid="Base_Column_List" />
+        ) values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (
+#foreach($field in $fields)
+#if(${foreach.last})
+				#{item.${field.name},jdbcType=${field.columnType}}
+#else
+				#{item.${field.name},jdbcType=${field.columnType}},
+#end
+#end
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteByKey" parameterType="java.io.Serializable">
+        delete from
+        <include refid="Base_Table"/>
+        where
+        <include refid="Where_Field_Key"/>
+    </delete>
+
+    <delete id="deleteByKeys" parameterType="java.util.Collection">
+        <foreach collection="list" item="item" index="index" separator=";" >
+            delete from
+            <include refid="Base_Table"/>
+            where
+#foreach($field in $keys)
+#if(${foreach.first})
+#if(${keys.size()} > 1)
+				${field.columnName} = #{item.${field.name}}
+#else
+				${field.columnName} = #{item}}
+#end
+#else
+		#if(${keys.size()} > 1)
+				and ${field.columnName} = #{item.${field.name}}
+#else
+				and ${field.columnName} = #{item}}
+#end
+#end
+#end
+        </foreach>
+    </delete>
+
+    <update id="updateByKey" parameterType="${entityPackage}.${entityName}">
+        update
+        <include refid="Base_Table"/>
+        set
+#foreach($field in $fields)
+#if(${foreach.last})
+			${field.columnName} = #{${field.name}, jdbcType=${field.columnType}}
+#else
+			${field.columnName} = #{${field.name}, jdbcType=${field.columnType}},
+#end
+#end
+        where
+            <include refid="Where_Field_Key"/>
+    </update>
+
+    <select id="selectByKey" parameterType="java.io.Serializable" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Base_Table"/>
+        <where>
+            <include refid="Where_Field_Key" />
+        </where>
+    </select>
+
+    <select id="select" parameterType="${entityPackage}.${entityName}" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Base_Table"/>
+        <where>
+            <include refid="Where_Field" />
+        </where>
+    </select>
+
+    <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="Base_Table"/>
+        <where>
+            <include refid="Where_Column" />
+        </where>
+    </select>
+
+    <select id="count" parameterType="${entityPackage}.${entityName}" resultType="java.lang.Integer">
+        select count(1)
+        from
+        <include refid="Base_Table"/>
+        <where>
+            <include refid="Where_Field" />
+        </where>
+    </select>
+
+    <select id="countByMap" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1)
+        from
+        <include refid="Base_Table"/>
+        <where>
+            <include refid="Where_Column" />
+        </where>
+    </select>
+    <!--===以上为代码生成器生成=== -->
+
+</mapper>

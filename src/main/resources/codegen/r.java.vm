@@ -1,0 +1,70 @@
+package ${rPackage};
+
+import java.io.Serializable;
+
+/**
+ * @author Zhongl
+ * @date 2020/05/24 22:18
+ */
+public class R<T> implements Serializable {
+
+    private String code;
+    private String msg;
+    private T data;
+
+    public R(String code, String msg) {
+        this(code, msg, null);
+    }
+
+    public R(String code, String msg, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
+
+    public static R ok() {
+        return ok(null);
+    }
+
+    public static <T> R ok(T data) {
+        return new R("0", "success", data);
+    }
+
+    public static R rs(String code, String msg) {
+        return new R(code, msg);
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public R<T> setData(T data) {
+        this.data = data;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "R{" +
+                "code='" + code + '\'' +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
+}

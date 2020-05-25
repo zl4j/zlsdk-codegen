@@ -1,0 +1,57 @@
+package ${package};
+
+import com.github.pagehelper.PageInfo;
+import ${rPackage}.R;
+import ${entityPackage}.${entityName};
+import ${servicePackage}.${serviceName};
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * ${comment} 访问控制类
+ * @author ${author}
+ * @date ${date}
+ */
+@RestController
+public class ${className} {
+
+    @Autowired
+    private ${serviceName} ${serviceRefName};
+
+    @GetMapping("/${pathName}/list")
+    public R<PageInfo<${entityName}>> list(Integer pageNum, Integer pageSize) {
+        Map<String,Object> map = new HashMap<String,Object>();
+
+        PageInfo<${entityName}> page = this.${serviceRefName}.findPageByMap(pageNum, pageSize, map);
+        return R.ok(page);
+    }
+
+    @GetMapping("/${pathName}/{id}")
+    public R<${entityName}> get(@PathVariable("id") Long id) {
+        ${entityName} ${entityRefName} = this.${serviceRefName}.findByKey(id);
+
+        return R.ok(${entityRefName});
+    }
+
+    @PostMapping("/${pathName}")
+    public R<Object> add(${entityName} ${entityRefName}) {
+        this.${serviceRefName}.save(${entityRefName});
+        return R.ok();
+    }
+
+    @DeleteMapping("/${pathName}/{id}")
+    public R<Object> delete(@PathVariable("id") Long id) {
+        this.${serviceRefName}.delete(id);
+        return R.ok();
+    }
+
+    @PutMapping("/${pathName}")
+    public R<Object> update(${entityName} ${entityRefName}) {
+        this.${serviceRefName}.update(${entityRefName});
+        return R.ok();
+    }
+
+}
