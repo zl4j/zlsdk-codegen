@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
  * @date 2020/05/24 12:42
  */
 @Transactional
-public abstract class BaseService<T,K> implements IService<T,K> {
+public abstract class BaseService<T> implements IService<T> {
     @Override
     public void save(T t) {
         getMapper().insert(t);
@@ -25,12 +26,12 @@ public abstract class BaseService<T,K> implements IService<T,K> {
     }
 
     @Override
-    public int delete(K k) {
-        return getMapper().deleteByKey(k);
+    public int delete(Serializable key) {
+        return getMapper().deleteByKey(key);
     }
 
     @Override
-    public int batchDelete(List<K> list) {
+    public int batchDelete(List<Serializable> list) {
         return getMapper().deleteByKeys(list);
     }
 
@@ -45,8 +46,8 @@ public abstract class BaseService<T,K> implements IService<T,K> {
     }
 
     @Override
-    public T findByKey(K k) {
-        return getMapper().selectByKey(k);
+    public T findByKey(Serializable key) {
+        return getMapper().selectByKey(key);
     }
 
     @Override

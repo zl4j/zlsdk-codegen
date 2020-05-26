@@ -16,13 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class ${className}Impl extends BaseService<${entityName},Long> implements ${className} {
+public class ${className}Impl extends BaseService<${entityName}> implements ${className} {
 
     @Autowired
     private ${mapperName} ${mapperRefName};
 
     @Override
-    public IMapper<${entityName}, Long> getMapper() {
+    public IMapper<${entityName}> getMapper() {
         return ${mapperRefName};
     }
 }

@@ -1,5 +1,6 @@
 package ${imapperPackage};
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -8,21 +9,21 @@ import java.util.Map;
  * @author Zhongl
  * @date 2020/05/24 11:44
  */
-public interface IMapper<T,K> {
+public interface IMapper<T> {
 
     void insert(T t);
 
     void batchInsert(List<T> list);
 
-    int deleteByKey(K k);
+    int deleteByKey(Serializable key);
 
-    int deleteByKeys(List<K> k);
+    int deleteByKeys(List<Serializable> keys);
 
     int updateByKey(T t);
 
     List<T> select(T t);
 
-    T selectByKey(K k);
+    T selectByKey(Serializable key);
 
     List<T> selectByMap(Map<String,Object> map);
 

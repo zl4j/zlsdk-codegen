@@ -7,9 +7,9 @@
     <resultMap id="BaseResultMap" type="${entityPackage}.${entityName}">
 #foreach($field in $fields)
 #if(${field.isKey})
-		<id column="${field.columnName}" jdbcType="${field.columnType}" property="${field.name}" />
+		<id column="${field.columnName}" jdbcType="${field.jdbcType}" property="${field.name}" />
 #else
-		<result column="${field.columnName}" jdbcType="${field.columnType}" property="${field.name}" />
+		<result column="${field.columnName}" jdbcType="${field.jdbcType}" property="${field.name}" />
 #end
 #end
     </resultMap>
@@ -38,9 +38,9 @@
 #foreach($field in $fields)
 			<if test="${field.columnName} != null">
 #if(${foreach.first})
-				${field.columnName} = #{${field.columnName}, jdbcType=${field.columnType}}
+				${field.columnName} = #{${field.columnName}, jdbcType=${field.jdbcType}}
 #else
-				and ${field.columnName} = #{${field.columnName}, jdbcType=${field.columnType}}
+				and ${field.columnName} = #{${field.columnName}, jdbcType=${field.jdbcType}}
 #end
 			</if>
 #end
@@ -50,16 +50,16 @@
 #foreach($field in $fields)
 			<if test="${field.name} != null">
 #if(${foreach.first})
-				${field.columnName} = #{${field.name}, jdbcType=${field.columnType}}
+				${field.columnName} = #{${field.name}, jdbcType=${field.jdbcType}}
 #else
-				and ${field.columnName} = #{${field.name}, jdbcType=${field.columnType}}
+				and ${field.columnName} = #{${field.name}, jdbcType=${field.jdbcType}}
 #end
 			</if>
 #end
     </sql>
 
-    <insert id="insert" parameterType="${entityPackage}.${entityName}" useGeneratedKeys="true"
-            keyProperty="id">
+    <insert id="insert" parameterType="${entityPackage}.${entityName}"
+                useGeneratedKeys="${autoInc}"#if(${autoInc}) keyProperty="${autoIncProp}" keyColumn="${autoIncCol}"#end>
         insert into
         <include refid="Base_Table"/>
         (
@@ -67,15 +67,16 @@
         ) values(
 #foreach($field in $fields)
 #if(${foreach.last})
-				#{${field.name},jdbcType=${field.columnType}}
+				#{${field.name},jdbcType=${field.jdbcType}}
 #else
-				#{${field.name},jdbcType=${field.columnType}},
+				#{${field.name},jdbcType=${field.jdbcType}},
 #end
 #end
         );
     </insert>
 
-    <insert id="batchInsert" parameterType="java.util.Collection" useGeneratedKeys="false" keyProperty="">
+    <insert id="batchInsert" parameterType="java.util.List"
+                useGeneratedKeys="${autoInc}"#if(${autoInc}) keyProperty="${autoIncProp}" keyColumn="${autoIncCol}"#end>
         insert into
         <include refid="Base_Table"/>
         (
@@ -85,9 +86,9 @@
             (
 #foreach($field in $fields)
 #if(${foreach.last})
-				#{item.${field.name},jdbcType=${field.columnType}}
+				#{item.${field.name},jdbcType=${field.jdbcType}}
 #else
-				#{item.${field.name},jdbcType=${field.columnType}},
+				#{item.${field.name},jdbcType=${field.jdbcType}},
 #end
 #end
             )
@@ -101,7 +102,7 @@
         <include refid="Where_Field_Key"/>
     </delete>
 
-    <delete id="deleteByKeys" parameterType="java.util.Collection">
+    <delete id="deleteByKeys" parameterType="java.util.List">
         <foreach collection="list" item="item" index="index" separator=";" >
             delete from
             <include refid="Base_Table"/>
@@ -130,9 +131,9 @@
         set
 #foreach($field in $fields)
 #if(${foreach.last})
-			${field.columnName} = #{${field.name}, jdbcType=${field.columnType}}
+			${field.columnName} = #{${field.name}, jdbcType=${field.jdbcType}}
 #else
-			${field.columnName} = #{${field.name}, jdbcType=${field.columnType}},
+			${field.columnName} = #{${field.name}, jdbcType=${field.jdbcType}},
 #end
 #end
         where

@@ -1,0 +1,20 @@
+package ${rPackage};
+
+/**
+ * @author Zhongl
+ * @date 2020/05/24 22:22
+ */
+public enum Rc {
+
+    OK("0", "success"),
+    FAIL("10999", "server error");
+
+    public final String code;
+    public final String msg;
+
+    Rc(String code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
+}

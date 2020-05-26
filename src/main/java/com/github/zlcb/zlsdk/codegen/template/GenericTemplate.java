@@ -28,6 +28,10 @@ public class GenericTemplate extends AbstractTemplate {
         dataMap.put("baseServicePackage", getConfig().getPackages()
                 .getBaseService());
 
+        //Rc 文件生成
+        engine.outputFile(getConfig().getTemplate()
+                .getRc(), getConfig().getOutputPath()
+                .getR(), "Rc", "java", dataMap);
         //R 文件生成
         engine.outputFile(getConfig().getTemplate()
                 .getR(), getConfig().getOutputPath()

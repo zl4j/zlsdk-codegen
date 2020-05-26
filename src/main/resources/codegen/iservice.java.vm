@@ -3,6 +3,7 @@ package ${iservicePackage};
 import com.github.pagehelper.PageInfo;
 import ${imapperPackage}.IMapper;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -10,23 +11,23 @@ import java.util.Map;
  * @author Zhongl
  * @date 2020/05/24 11:58
  */
-public interface IService<T,K> {
+public interface IService<T> {
 
-    IMapper<T,K> getMapper();
+    IMapper<T> getMapper();
 
     void save(T t);
 
     void batchSave(List<T> list);
 
-    int delete(K k);
+    int delete(Serializable key);
 
-    int batchDelete(List<K> list);
+    int batchDelete(List<Serializable> list);
 
     int update(T t);
 
     List<T> find(T t);
 
-    T findByKey(K k);
+    T findByKey(Serializable key);
 
     List<T> findByMap(Map<String,Object> map);
 

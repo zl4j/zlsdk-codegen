@@ -1,5 +1,6 @@
 package com.github.zlcb.zlsdk.codegen.template;
 
+import com.github.zlcb.zlsdk.codegen.database.DataType;
 import com.github.zlcb.zlsdk.codegen.engine.AbstractTemplateEngine;
 import com.github.zlcb.zlsdk.codegen.model.Column;
 import com.github.zlcb.zlsdk.codegen.model.Table;
@@ -36,6 +37,9 @@ public class MappingTemplate extends AbstractTemplate {
 
         List<Map<String,Object>> fieldList = new ArrayList<Map<String,Object>>();
         List<Map<String,Object>> keyList = new ArrayList<Map<String,Object>>();
+        boolean autoInc = false;
+        StringBuilder aifn = new StringBuilder();
+        StringBuilder aicn = new StringBuilder();
 
         String fieldName;
         Map<String,Object> fieldMap, keyMap;
@@ -44,7 +48,7 @@ public class MappingTemplate extends AbstractTemplate {
             fieldMap = new HashMap<String, Object>(4);
             fieldMap.put("name", fieldName);
             fieldMap.put("columnName", col.getName());
-            fieldMap.put("columnType", StringUtils.upperCase(col.getDataType()));
+            fieldMap.put("jdbcType", DataType.get(col.getDataType()).getJdbcType());
             fieldList.add(fieldMap);
 
             //主键
@@ -53,11 +57,24 @@ public class MappingTemplate extends AbstractTemplate {
                 keyMap.put("name", fieldName);
                 keyMap.put("columnName", col.getName());
                 keyList.add(keyMap);
+
+                if (col.isAutoIncrement()) {
+                    autoInc = true;
+                    if (aifn.length() > 0) {
+                        aifn.append(",");
+                        aicn.append(",");
+                    }
+                    aifn.append(fieldName);
+                    aicn.append(col.getName());
+                }
             }
         }
 
         dataMap.put("fields", fieldList);
         dataMap.put("keys", keyList);
+        dataMap.put("autoInc", autoInc);
+        dataMap.put("autoIncProp", aifn.toString());
+        dataMap.put("autoIncCol", aicn.toString());
 
         //生成Mapping文件
         engine.outputFile(templatePath, getConfig().getOutputPath()

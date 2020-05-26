@@ -20,6 +20,8 @@ public class TemplateConfig {
     private final String baseService = TEMPLATE_PATH + "/baseService.java.vm";
     //R模板文件名
     private final String r = TEMPLATE_PATH + "/r.java.vm";
+    //Rc模板文件名
+    private final String rc = TEMPLATE_PATH + "/rc.java.vm";
 
     //映射文件模板文件名
     private String mapping = TEMPLATE_PATH + "/mapping.xml.vm";
@@ -121,6 +123,10 @@ public class TemplateConfig {
 
     public String getR() {
         return r;
+    }
+
+    public String getRc() {
+        return rc;
     }
 
     public String getBaseService() {

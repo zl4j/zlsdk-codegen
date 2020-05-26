@@ -8,6 +8,6 @@ import ${entityPackage}.${entityName};
  * @author ${author}
  * @date ${date}
  */
-public interface ${className} extends IService<${entityName}, Long> {
+public interface ${className} extends IService<${entityName}> {
 
 }
