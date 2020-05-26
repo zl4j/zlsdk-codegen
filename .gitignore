@@ -36,3 +36,4 @@ gen
 
 *.lst
 *.kotlin_module
+/target/

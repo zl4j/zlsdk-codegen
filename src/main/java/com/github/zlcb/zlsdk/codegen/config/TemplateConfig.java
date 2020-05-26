@@ -3,6 +3,7 @@ package com.github.zlcb.zlsdk.codegen.config;
 import org.apache.commons.lang3.StringUtils;
 
 /**
+ * 模板信息配置
  * @author Zhongl
  * @date 2020/05/25 01:54
  */

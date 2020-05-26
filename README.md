@@ -1,19 +1,16 @@
-[toc]
-
 ## 目录
 
 ### 项目介绍
+
+- zlsdk-codegen是一款开源的代码生成工具包。目前可以生成Entity、Mapping、Mapper、Service、Controller代码，减少了大量的开发任务
+- 适用于使用Springboot、Mybatis进行快速构建开发。提供简洁、灵活的API，使开发人员尽量只用关注上层代码
 
 
 
 ### 开发环境
 
 - JDK1.8
-- Maven3.5+
-
-#### 第三方工具包
-
-
+- Maven3.0+
 
 
 
@@ -63,7 +60,28 @@ public class CodeGenApp {
 
 
 
-### 开发指南
+### 使用指南
+
+#### 依赖包说明
+
+```xml
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.13</version>
+        </dependency>
+```
+
+
 
 #### 配置类说明
 
@@ -146,7 +164,7 @@ public class CodeGenApp {
 | service     | 服务接口生成目录    | ${user.dir}/src/main/java/${basePackage}/service<br />${user.dir}/src/main/java/${basePackage}/service/impl |
 | controller  | 访问控制类生成目录  | ${user.dir}/src/main/java/${basePackage}/controller          |
 
-#### 方法使用说明
+#### 方法说明
 
 ##### run()
 
@@ -306,12 +324,10 @@ Rows:16
 
 
 
-### 联系作者
+### 如何交流、反馈？
 
 - 邮箱：996cxy@gmail.com
-- qq群：
-- github：
+- qq群：584847393
+- github：https://github.com/zlcb
 
 
-
-[回到顶部](##目录)

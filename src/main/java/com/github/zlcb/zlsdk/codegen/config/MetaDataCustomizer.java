@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 自定义数据接口
  * @author Zhongl
  * @date 2020/05/21 23:10
  */

@@ -3,6 +3,7 @@ package com.github.zlcb.zlsdk.codegen.config;
 import com.github.zlcb.zlsdk.codegen.util.Const;
 
 /**
+ * 文件输出路径配置
  * @author Zhongl
  * @date 2020/05/25 17:43
  */

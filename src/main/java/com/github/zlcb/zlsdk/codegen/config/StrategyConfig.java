@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 生成策略配置
  * @author Zhongl
  * @date 2020/05/21 19:17
  */
