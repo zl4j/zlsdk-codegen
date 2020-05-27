@@ -4,9 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+   <name>zlcb/zlsdk-codegen</name>
     <groupId>com.github.zlcb</groupId>
     <artifactId>zlsdk-codegen</artifactId>
     <version>1.0.1</version>
+    <packaging>jar</packaging>
 
     <description>zlsdk-codegen is a lightweight code generator.</description>
     <url>https://github.com/zlcb</url>
@@ -154,4 +156,5 @@
             </distributionManagement>
         </profile>
     </profiles>
+	
 </project>
