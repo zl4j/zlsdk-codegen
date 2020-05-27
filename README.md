@@ -2,7 +2,7 @@
 
 ### 项目介绍
 
-- zlsdk-codegen是一款开源的代码生成工具包。目前可以生成Entity、Mapping、Mapper、Service、Controller代码，减少了大量的开发任务
+- zlsdk-codegen是一款开源的代码生成工具包。目前可以生成Entity、Mapping、Mapper、Service、Controller代码，很大程度上降低了开发人员的工作量
 - 适用于使用Springboot、Mybatis进行快速构建开发。提供简洁、灵活的API，使开发人员尽量只用关注上层代码
 
 
