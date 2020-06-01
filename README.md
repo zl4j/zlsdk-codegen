@@ -22,7 +22,7 @@
 <dependency>
     <groupId>com.github.zlcb</groupId>
     <artifactId>zlsdk-codegen</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <optional>true</optional>
 </dependency>
 ```
