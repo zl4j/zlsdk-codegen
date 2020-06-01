@@ -32,18 +32,18 @@ public enum MySqlDataType implements DataType {
     CHAR(JdbcType.CHAR, String.class),
     VARCHAR(JdbcType.VARCHAR, String.class),
 
-    BINARY(JdbcType.BINARY, Byte[].class),
-    VARBINARY(JdbcType.VARBINARY, Byte[].class),
+    BINARY(JdbcType.BINARY, "byte[]"),
+    VARBINARY(JdbcType.VARBINARY, "byte[]"),
 
     TINYTEXT(JdbcType.VARCHAR, String.class),
     TEXT(JdbcType.LONGVARCHAR, String.class),
     MEDIUMTEXT(JdbcType.LONGVARCHAR, String.class),
     LONGTEXT(JdbcType.LONGVARCHAR, String.class),
 
-    TINYBLOB(JdbcType.VARBINARY, Byte[].class),
-    BLOB(JdbcType.BLOB, Byte[].class),
-    MEDIUMBLOB(JdbcType.LONGVARBINARY, Byte[].class),
-    LONGBLOB(JdbcType.LONGVARBINARY, Byte[].class),
+    TINYBLOB(JdbcType.VARBINARY, "byte[]"),
+    BLOB(JdbcType.BLOB, "byte[]"),
+    MEDIUMBLOB(JdbcType.LONGVARBINARY, "byte[]"),
+    LONGBLOB(JdbcType.LONGVARBINARY, "byte[]"),
 
     OTHER(JdbcType.OTHER, Object.class);
 
@@ -51,7 +51,11 @@ public enum MySqlDataType implements DataType {
     private String jdbcType;
 
     MySqlDataType(JdbcType jdbcType, Class javaType) {
-        this.javaType = javaType.getName();
+        this(jdbcType, javaType.getName());
+    }
+
+    MySqlDataType(JdbcType jdbcType, String javaType) {
+        this.javaType = javaType;
         this.jdbcType = jdbcType.name();
     }
 
