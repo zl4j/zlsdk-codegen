@@ -1,6 +1,5 @@
 package com.github.zlcb.zlsdk.codegen.template;
 
-import com.github.zlcb.zlsdk.codegen.database.DataType;
 import com.github.zlcb.zlsdk.codegen.engine.AbstractTemplateEngine;
 import com.github.zlcb.zlsdk.codegen.model.Column;
 import com.github.zlcb.zlsdk.codegen.model.Table;
@@ -41,8 +40,7 @@ public class EntityTemplate extends AbstractTemplate {
         String constName, fieldName, methodName, typeName;
         Map<String, Object> constMap, fieldMap, keyMap, methodMap;
         for (Column col : t.getColumns()) {
-            typeName = DataType.get(col.getDataType())
-                    .getJavaType();
+            typeName = col.getDataType().getJavaType();
             if (StringUtils.contains(typeName, ".")) {
                 importSet.add(typeName);
                 typeName = StringUtils.substringAfterLast(typeName, ".");

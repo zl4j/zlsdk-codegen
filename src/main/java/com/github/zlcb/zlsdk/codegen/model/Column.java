@@ -1,5 +1,7 @@
 package com.github.zlcb.zlsdk.codegen.model;
 
+import com.github.zlcb.zlsdk.codegen.database.DataType;
+
 /**
  * @author Zhongl
  * @date 2020/05/22 22:18
@@ -14,7 +16,7 @@ public class Column {
 
     private String name;
     private String comment;
-    private String dataType;
+    private DataType dataType;
     private boolean primaryKey;
     private boolean autoIncrement;
 
@@ -34,11 +36,11 @@ public class Column {
         this.comment = comment;
     }
 
-    public String getDataType() {
+    public DataType getDataType() {
         return dataType;
     }
 
-    public void setDataType(String dataType) {
+    public void setDataType(DataType dataType) {
         this.dataType = dataType;
     }
 

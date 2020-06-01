@@ -23,15 +23,19 @@ public enum JdbcType {
     DOUBLE(Types.DOUBLE),
     NUMERIC(Types.NUMERIC),
     DECIMAL(Types.DECIMAL),
+
     CHAR(Types.CHAR),
     VARCHAR(Types.VARCHAR),
     LONGVARCHAR(Types.LONGVARCHAR),
+
     DATE(Types.DATE),
     TIME(Types.TIME),
     TIMESTAMP(Types.TIMESTAMP),
+
     BINARY(Types.BINARY),
     VARBINARY(Types.VARBINARY),
     LONGVARBINARY(Types.LONGVARBINARY),
+
     NULL(Types.NULL),
     OTHER(Types.OTHER),
     BLOB(Types.BLOB),
@@ -50,15 +54,22 @@ public enum JdbcType {
     ROWID(Types.ROWID), // JDK6
     LONGNVARCHAR(Types.LONGNVARCHAR), // JDK6
     SQLXML(Types.SQLXML), // JDK6
-    DATETIMEOFFSET(-155); // SQL Server 2008
+    DATETIMEOFFSET(-155), // SQL Server 2008
+    TIME_WITH_TIMEZONE(Types.TIME_WITH_TIMEZONE), // JDBC 4.2 JDK8
+    TIMESTAMP_WITH_TIMEZONE(Types.TIMESTAMP_WITH_TIMEZONE); // JDBC 4.2 JDK8
 
-    public final int typeCode;
+    public final int TYPE_CODE;
 
-    JdbcType(int typeCode) {
-        this.typeCode = typeCode;
+    JdbcType(int code) {
+        this.TYPE_CODE = code;
     }
 
-    public int getTypeCode() {
-        return typeCode;
+    public static JdbcType forCode(int code) {
+        for (JdbcType type : JdbcType.values()) {
+            if (type.TYPE_CODE == code) {
+                return type;
+            }
+        }
+        return null;
     }
 }

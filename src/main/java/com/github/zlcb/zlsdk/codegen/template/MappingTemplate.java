@@ -1,10 +1,8 @@
 package com.github.zlcb.zlsdk.codegen.template;
 
-import com.github.zlcb.zlsdk.codegen.database.DataType;
 import com.github.zlcb.zlsdk.codegen.engine.AbstractTemplateEngine;
 import com.github.zlcb.zlsdk.codegen.model.Column;
 import com.github.zlcb.zlsdk.codegen.model.Table;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.CaseUtils;
 
 import java.util.ArrayList;
@@ -48,7 +46,7 @@ public class MappingTemplate extends AbstractTemplate {
             fieldMap = new HashMap<String, Object>(4);
             fieldMap.put("name", fieldName);
             fieldMap.put("columnName", col.getName());
-            fieldMap.put("jdbcType", DataType.get(col.getDataType()).getJdbcType());
+            fieldMap.put("jdbcType", col.getDataType().getJdbcType());
             fieldList.add(fieldMap);
 
             //主键

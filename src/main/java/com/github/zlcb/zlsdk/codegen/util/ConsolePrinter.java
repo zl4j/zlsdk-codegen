@@ -111,7 +111,7 @@ public class ConsolePrinter {
         for (Column c : columns) {
             sb.append(StringUtils.rightPad(c.getName(), nameMaxLen));
             sb.append(' ');
-            sb.append(StringUtils.rightPad(c.getDataType(), Column.DATA_TYPE.length()));
+            sb.append(StringUtils.rightPad(c.getDataType().getJdbcType(), Column.DATA_TYPE.length()));
             sb.append(' ');
             sb.append(StringUtils.rightPad((c.isPrimaryKey() ? "Yes" : "No"), Column.PRIMARY_KEY.length()));
             sb.append(' ');

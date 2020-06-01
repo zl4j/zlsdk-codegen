@@ -1,55 +1,15 @@
 package com.github.zlcb.zlsdk.codegen.database;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 /**
  * @author Zhongl
- * @date 2020/05/23 01:14
+ * @date 2020/06/02 00:15
  */
-public enum DataType {
-    BIT(JdbcType.BIT, Boolean.class.getName()),
-    TINYINT(JdbcType.TINYINT, Integer.class.getName()),
-    SMALLINT(JdbcType.SMALLINT, Integer.class.getName()),
-    INT(JdbcType.INTEGER, Integer.class.getName()),
-    INTEGER(JdbcType.INTEGER, Integer.class.getName()),
-    BIGINT(JdbcType.BIGINT, Long.class.getName()),
-    FLOAT(JdbcType.FLOAT, Float.class.getName()),
-    DOUBLE(JdbcType.DOUBLE, Double.class.getName()),
-    DECIMAL(JdbcType.DECIMAL, BigDecimal.class.getName()),
-    DATE(JdbcType.DATE, Date.class.getName()),
-    DATETIME(JdbcType.TIMESTAMP, Date.class.getName()),
-    TIMESTAMP(JdbcType.TIMESTAMP, Date.class.getName()),
-    TIME(JdbcType.TIME, Date.class.getName()),
-    CHAR(JdbcType.CHAR, String.class.getName()),
-    VARCHAR(JdbcType.VARCHAR, String.class.getName()),
-    BINARY(JdbcType.BINARY, "byte[]"),
-    VARBINARY(JdbcType.VARBINARY, "byte[]"),
-    BLOB(JdbcType.BLOB, "byte[]"),
-    OTHER(JdbcType.OTHER, Object.class.getName());
+public interface DataType {
 
-    private String javaType;
-    private String jdbcType;
+    String getJdbcType();
 
-    DataType(JdbcType jdbcType, String javaType) {
-        this.javaType = javaType;
-        this.jdbcType = jdbcType.name();
-    }
+    String getJavaType();
 
-    public String getJavaType() {
-        return javaType;
-    }
+    String getName();
 
-    public String getJdbcType() {
-        return jdbcType;
-    }
-
-    public static DataType get(String name) {
-        for (DataType dataType : DataType.values()) {
-            if (dataType.name().equals(name.toUpperCase())) {
-                return dataType;
-            }
-        }
-        return OTHER;
-    }
 }

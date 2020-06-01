@@ -49,7 +49,7 @@ public class MySqlQuery extends AbstractQuery {
                         col = new Column();
                         col.setName(rs.getString("name"));
                         col.setComment(rs.getString("comment"));
-                        col.setDataType(rs.getString("dataType"));
+                        col.setDataType(MySqlDataType.forName(rs.getString("dataType")));
                         col.setPrimaryKey("PRI".equalsIgnoreCase(rs.getString("primaryKey")));
                         col.setAutoIncrement("auto_increment".equalsIgnoreCase(rs.getString("autoIncrement")));
                         list.add(col);

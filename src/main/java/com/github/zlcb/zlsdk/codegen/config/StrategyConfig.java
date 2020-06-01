@@ -53,7 +53,7 @@ public class StrategyConfig {
     public static class StrategyConfigurer implements Configurer<StrategyConfig> {
 
         //是否生成基类
-        private boolean generateBase = true;
+        private boolean generateBase = false;
         //是否生成实体类
         private boolean generateEntity = true;
         //是否生成数据映射文件

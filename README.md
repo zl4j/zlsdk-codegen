@@ -22,7 +22,7 @@
 <dependency>
     <groupId>com.github.zlcb</groupId>
     <artifactId>zlsdk-codegen</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.2</version>
     <optional>true</optional>
 </dependency>
 ```
@@ -111,7 +111,7 @@ public class CodeGenApp {
 
 | 配置项             | 说明                                                         | 是否必须 | 默认值 |
 | ------------------ | ------------------------------------------------------------ | -------- | ------ |
-| generateBase       | 是否生成基类，包含：IMapper、IService、BaseService           | 否       | true   |
+| generateBase       | 是否生成基类，包含：IMapper、IService、BaseService           | 否       | false   |
 | generateEntity     | 是否生成实例类                                               | 否       | true   |
 | generateMapping    | 是否生成数据映射文件                                         | 否       | true   |
 | generateMapper     | 是否生成数据访问类                                           | 否       | true   |
